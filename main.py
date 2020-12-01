@@ -1,20 +1,32 @@
 import pygame
 
-def step():
-	pass
+def step(pos, key):
+	if key == "up":
+		pos[1] -= 10
+	elif key == "down":
+		pos[1] += 10
+	elif key == "right":
+		pos[0] += 10
+	elif key == "left":
+		pos[0] -= 10
+	return pos
 
-def display():
+def display(pos):
 	# Color entire window with a certain color.
 	window_surface.fill((255, 255, 255))
-
-	# Blit the surface "button_surface" on the main surface (window_surface) on coord x,y = 100,75.
-	window_surface.blit(button_surface, (100, 75))
+	
 	# Loading new texts.
 	example_txt = font_lemonmilk.render("Example", True, BLACK)
 	size_example_txt = font_lemonmilk.render("size of example : " + str(example_txt.get_size()), True, BLACK)
+	manuel_txt = font_lemonmilk.render("Use UP DOWN LEFT RIGHT key", True, BLACK)
 	# Blit new texts.
 	window_surface.blit(example_txt, (100, 175))
-	window_surface.blit(size_example_txt, (100, 275))
+	window_surface.blit(size_example_txt, (100, 225))
+	window_surface.blit(manuel_txt, (100, 275))
+
+	# Blit the surface "button_surface" on the main surface (window_surface) on coord x,y = 100,75.
+	# For exemple we can control it.
+	window_surface.blit(button_surface, (pos[0], pos[1]))
 
 	# Applies new changes on the display.
 	pygame.display.flip()
@@ -41,6 +53,15 @@ font_lemonmilk = pygame.font.Font('assets/LEMONMILK-Regular.otf', 20)
 # clock is for fps
 clock = pygame.time.Clock()
 
+# Allow to hold the same key (arg in ms)
+pygame.key.set_repeat(1, 1)
+
+# Pos of button for example
+pos = [0, 0]
+
+# First display.
+display(pos)
+
 # Start mainloop.
 launched = True
 while launched:
@@ -55,10 +76,15 @@ while launched:
 		elif event.type == pygame.KEYDOWN:
 			if event.key == pygame.K_a:
 				print(event.key)
-
-	# Do things.
-	step()
-	display()
+			elif event.key == pygame.K_UP:
+				pos = step(pos, "up")
+			elif event.key == pygame.K_DOWN:
+				pos = step(pos, "down")
+			elif event.key == pygame.K_LEFT:
+				pos = step(pos, "left")
+			elif event.key == pygame.K_RIGHT:
+				pos = step(pos, "right")
+			display(pos)
 
 	# For fps.
 	clock.tick(60)

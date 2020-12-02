@@ -95,7 +95,9 @@ display(game_state)
 
 # Will store all GameObject
 gameObject_list = {}
-player = pl.Player(speed=1, life=3, coordinates=(100, 100), size=(50, 50))
+player = pl.Player(speed=1, life=3, coordinates=(window_width / 2 - allVehicles.vehicles[player_index].width / 2, \
+        window_height - 50 - allVehicles.vehicles[player_index].height), \
+        size=(allVehicles.vehicles[player_index].width, allVehicles.vehicles[player_index].height))
 
 # Start mainloop.
 launched = True
@@ -110,16 +112,19 @@ while launched:
             if event.button == 1:
                 print("clic gauche")
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_BACKSPACE:
-                game_state = "in_game"
-            elif event.key == pygame.K_UP and player.check_collision_border("Top", 0):
-                player.move('up')
-            elif event.key == pygame.K_DOWN and player.check_collision_border("Bottom", window_height):
-                player.move('down')
-            elif event.key == pygame.K_LEFT and player.check_collision_border("Left", 0):
-                player.move('left')
-            elif event.key == pygame.K_RIGHT and player.check_collision_border("Right", window_width):
-                player.move('right')
+            if game_state == "menu":
+                if event.key == pygame.K_BACKSPACE:
+                    game_state = "in_game"
+
+            elif game_state == "in_game":
+                if event.key == pygame.K_UP and player.check_collision_border("Top", 0):
+                    player.move('up')
+                elif event.key == pygame.K_DOWN and player.check_collision_border("Bottom", window_height):
+                    player.move('down')
+                elif event.key == pygame.K_LEFT and player.check_collision_border("Left", 0):
+                    player.move('left')
+                elif event.key == pygame.K_RIGHT and player.check_collision_border("Right", window_width):
+                    player.move('right')
     player.check_all_collisions(gameObject_list)
 
 
@@ -130,4 +135,3 @@ while launched:
 
 # Force exit program
 pygame.display.quit()
-

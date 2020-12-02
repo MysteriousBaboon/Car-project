@@ -1,6 +1,4 @@
 import pygame
-import sys
-import pygame.sprite as sprite
 
 theClock = pygame.time.Clock()
 

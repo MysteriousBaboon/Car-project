@@ -1,5 +1,6 @@
 import pygame
 
+
 class Vehicle:
     def setName(self, name):
         self.name = name
@@ -7,7 +8,8 @@ class Vehicle:
         self.y = 0
         self.width = 0
         self.height = 0
-        self.image = 0
+        rect = pygame.Rect((self.x, self.y, self.width, self.height))
+        self.image = pygame.Surface(rect.size).convert()
 
     def setLocation(self, xy):
         # print(xy)
@@ -26,6 +28,10 @@ class Vehicle:
 
     def getImage(self):
         return self.image
+
+    def getRect(self):
+        rect = pygame.Rect((self.x, self.y, self.width, self.height))
+        return rect
 
     def __str__(self):
         return f"{self.name} : loc({self.x}, {self.y}), size({self.width}, {self.height})"
@@ -56,6 +62,7 @@ class Vehicles:
                 # Add new vehicle
                 rect = pygame.Rect((newVehicle.x, newVehicle.y, newVehicle.width, newVehicle.height))
                 image = pygame.Surface(rect.size).convert()
+                image.blit(self.sprite_sheet, (0, 0), rect)
                 newVehicle.setImage(image)
                 self.vehicles.append(newVehicle)
 
@@ -67,6 +74,7 @@ class Vehicles:
                     # Add new vehicle
                     rect = pygame.Rect((newVehicle.x, newVehicle.y, newVehicle.width, newVehicle.height))
                     image = pygame.Surface(rect.size).convert()
+                    image.blit(self.sprite_sheet, (0, 0), rect)
                     newVehicle.setImage(image)
                     self.vehicles.append(newVehicle)
                 # Save the last vehicle

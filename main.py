@@ -27,7 +27,8 @@ def display(pos):
     window_surface.blit(size_example_txt, (100, 225))
     window_surface.blit(manuel_txt, (100, 275))
     # Load one vehicule
-    window_surface.blit(allVehicles.getListVehicules()[0].getImage(), (0, 0))
+    window_surface.blit(allVehicles.getListVehicules()[0].getImage(), (0, 0),
+                        allVehicles.getListVehicules()[0].getRect())
 
     # Blit the surface "button_surface" on the main surface (window_surface) on coord x,y = 100,75.
     # For exemple we can control it.

@@ -1,6 +1,20 @@
 import pygame
 import vehicles as vh
 import player as pl
+import random
+
+
+class OneBot(object):
+    """docstring for OneBot"""
+
+    def __init__(self, x, y, vehicles):
+        super(OneBot, self).__init__()
+        self.x = random.randint(0, 2)
+        self.y = 0
+        rand = 21
+        while rand == 21:
+            rand = random.randint(0, 55)
+        self.image = vehicles[rand].image
 
 
 def display_road():
@@ -31,7 +45,7 @@ def display(game_state):
         window_surface.fill(GREEN)
 
         display_road()
-        #display_vehicules()
+        # display_vehicules()
 
         # Loading new texts.
         example_txt = font_lemonmilk.render("Example", True, BLACK)
@@ -45,6 +59,15 @@ def display(game_state):
         # Blit the users car. (Bumblebee)
         window_surface.blit(allVehicles.vehicles[player_index].image,
                             (player.x, player.y))
+        i = 0
+        while i < len(list_bot):
+            list_bot[i].y += 2
+            if list_bot[i].y >= window_height:
+                list_bot.pop(i)
+                i -= 1
+            else:
+                window_surface.blit(list_bot[i].image, (list_bot[i].x, list_bot[i].y))
+            i += 1
         display_scoreboard()
 
     # Blit the surface "button_surface" on the main surface (window_surface) on coord x,y = 100,75.
@@ -86,7 +109,7 @@ player_index = 21
 clock = pygame.time.Clock()
 
 # Allow to hold the same key (arg in ms)
-pygame.key.set_repeat(1, 1)
+pygame.key.set_repeat(1000, 1)
 
 game_state = "menu"
 
@@ -96,8 +119,12 @@ display(game_state)
 # Will store all GameObject
 gameObject_list = {}
 player = pl.Player(speed=1, life=3, coordinates=(window_width / 2 - allVehicles.vehicles[player_index].width / 2, \
-        window_height - 50 - allVehicles.vehicles[player_index].height), \
-        size=(allVehicles.vehicles[player_index].width, allVehicles.vehicles[player_index].height))
+                                                 window_height - 50 - allVehicles.vehicles[player_index].height), \
+                   size=(allVehicles.vehicles[player_index].width, allVehicles.vehicles[player_index].height))
+
+bot = OneBot(x=0, y=0, vehicles=allVehicles.vehicles)
+list_bot = []
+list_bot.append(bot)
 
 # Start mainloop.
 launched = True
@@ -115,19 +142,13 @@ while launched:
             if game_state == "menu":
                 if event.key == pygame.K_BACKSPACE:
                     game_state = "in_game"
-
             elif game_state == "in_game":
-                if event.key == pygame.K_UP and player.check_collision_border("Top", 0):
-                    player.move('up')
-                elif event.key == pygame.K_DOWN and player.check_collision_border("Bottom", window_height):
-                    player.move('down')
-                elif event.key == pygame.K_LEFT and player.check_collision_border("Left", 0):
-                    player.move('left')
-                elif event.key == pygame.K_RIGHT and player.check_collision_border("Right", window_width):
-                    player.move('right')
+                if event.key == pygame.K_LEFT:
+                    player.move('Left')
+                elif event.key == pygame.K_RIGHT:
+                    player.move('Right')
+
     player.check_all_collisions(gameObject_list)
-
-
     display(game_state)
 
     # For fps.

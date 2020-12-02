@@ -21,6 +21,6 @@ class Roads:
         for col in range(self.surfaceSize, self.window_width - self.surfaceSize, self.surfaceSize):
             for row in range(0, self.window_height, self.surfaceSize):
                 if col == self.surfaceSize * 1 or col == self.surfaceSize * 4:
-                    self.window_height.blit(self.roadBorder, (col, row))
+                    self.window_surface.blit(self.roadBorder, (col, row))
                 else:
                     self.window_surface.blit(self.roadPass, (col, row))

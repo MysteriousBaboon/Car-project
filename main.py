@@ -5,6 +5,7 @@ import player as pl
 import display as ds
 import bot
 import time
+import Roads
 
 
 def init_game():
@@ -48,8 +49,9 @@ pygame.key.set_repeat(1000, 1)
 
 game_state = "menu"
 init_timer, player, list_bot = init_game()
+road = Roads.Roads(window_surface, window_width, window_height)
 # First display.
-ds.display(game_state, window_surface,window_width,window_height, player, list_bot, font_lemonmilk, allVehicles, init_timer)
+ds.display(game_state, window_surface,window_width,window_height, player, list_bot, font_lemonmilk, allVehicles, init_timer, road)
 
 # Start mainloop.
 launched = True
@@ -77,7 +79,7 @@ while launched:
     if player.check_all_collisions(list_bot) == True:
     	print("dead")
     ds.display(game_state, window_surface, window_width,
-               window_height, player, list_bot, font_lemonmilk, allVehicles, init_timer)
+               window_height, player, list_bot, font_lemonmilk, allVehicles, init_timer, road)
 
     # For fps.
     clock.tick(60)

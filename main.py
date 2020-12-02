@@ -19,7 +19,7 @@ def step(key):
 
 def display():
     # Color entire window with a certain color.
-    window_surface.fill((255, 255, 255))
+    window_surface.fill(GREEN)
 
     # Loading new texts.
     example_txt = font_lemonmilk.render("Example", True, BLACK)
@@ -31,6 +31,7 @@ def display():
     window_surface.blit(manuel_txt, (100, 275))
     # Load one vehicule
     window_surface.blit(allVehicles.getListVehicules()[index[0]].getImage(), (allVehicles.vehicles[index[0]].x, allVehicles.vehicles[index[0]].y))
+    window_surface.blit(allVehicles.sprite_sheet, (0, 0))
 
     # Blit the surface "button_surface" on the main surface (window_surface) on coord x,y = 100,75.
     # For exemple we can control it.

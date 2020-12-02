@@ -33,8 +33,7 @@ def display(game_state, window_surface,window_width, window_height, player, list
         # Color entire window with a certain color.
         window_surface.fill(GREEN)
         road.display(init_timer)
-        window_surface.blit(allVehicles.vehicles[21].image,
-                            (player.x * 100, player.y))
+        window_surface.blit(allVehicles.vehicles[21].image, (player.x * 85 + 100, player.y))
         i = 0
         while i < len(list_bot):
             list_bot[i].y += 2
@@ -42,7 +41,7 @@ def display(game_state, window_surface,window_width, window_height, player, list
                 list_bot.pop(i)
                 i -= 1
             else:
-                window_surface.blit(list_bot[i].image, (list_bot[i].x * 100, list_bot[i].y))
+                window_surface.blit(list_bot[i].image, (list_bot[i].x * 85 + 100, list_bot[i].y))
             i += 1
         display_scoreboard(window_surface,window_width, font, init_timer)
 

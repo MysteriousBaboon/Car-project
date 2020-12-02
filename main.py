@@ -4,6 +4,7 @@ import vehicles as vh
 import player as pl
 import display as ds
 import bot
+import time
 
 
 # Exemple loading a pic.
@@ -52,7 +53,8 @@ list_bot = []
 list_bot.append(bot)
 
 # First display.
-ds.display(game_state, window_surface,window_width,window_height, player, list_bot, font_lemonmilk, allVehicles)
+init_timer = time.time()
+ds.display(game_state, window_surface,window_width,window_height, player, list_bot, font_lemonmilk, allVehicles, init_timer)
 
 # Start mainloop.
 launched = True
@@ -70,6 +72,7 @@ while launched:
             if game_state == "menu":
                 if event.key == pygame.K_BACKSPACE:
                     game_state = "in_game"
+                    init_timer = time.time()
             elif game_state == "in_game":
                 if event.key == pygame.K_LEFT:
                     player.move('Left')
@@ -78,7 +81,7 @@ while launched:
 
     player.check_all_collisions(gameObject_list)
     ds.display(game_state, window_surface, window_width,
-               window_height, player, list_bot, font_lemonmilk, allVehicles)
+               window_height, player, list_bot, font_lemonmilk, allVehicles, init_timer)
 
     # For fps.
     clock.tick(60)

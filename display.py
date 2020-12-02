@@ -32,7 +32,7 @@ def display(game_state, window_surface,window_width, window_height, player, list
         window_surface.fill(GREEN)
         display_road()
         window_surface.blit(allVehicles.vehicles[21].image,
-                            (player.x, player.y))
+                            (player.x * 100, player.y))
         i = 0
         while i < len(list_bot):
             list_bot[i].y += 2

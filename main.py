@@ -8,9 +8,8 @@ import time
 
 
 # Exemple loading a pic.
-button_surface = pygame.image.load('assets/button.png')
-
 pygame.init()
+button_surface = pygame.image.load('assets/button.png')
 
 # Loading a font.
 font_lemonmilk = pygame.font.Font('assets/LEMONMILK-Regular.otf', 20)
@@ -43,11 +42,10 @@ game_state = "menu"
 
 
 # Will store all GameObject
-player = pl.Player(speed=1, life=3, coordinates=(window_width / 2 - allVehicles.vehicles[player_index].width / 2, \
-                                                 window_height - 50 - allVehicles.vehicles[player_index].height), \
+player = pl.Player(speed=1, life=3, coordinates=(2,window_height - 50 - allVehicles.vehicles[player_index].height), \
                    size=(allVehicles.vehicles[player_index].width, allVehicles.vehicles[player_index].height))
 
-bot = bot.OneBot(x=0, y=0, vehicles=allVehicles.vehicles)
+bot = bot.OneBot(vehicles=allVehicles.vehicles)
 list_bot = []
 list_bot.append(bot)
 
@@ -78,7 +76,8 @@ while launched:
                 elif event.key == pygame.K_RIGHT:
                     player.move('Right')
 
-    player.check_all_collisions(list_bot)
+    if player.check_all_collisions(list_bot) == True:
+    	print("dead")
     ds.display(game_state, window_surface, window_width,
                window_height, player, list_bot, font_lemonmilk, allVehicles, init_timer)
 

@@ -77,7 +77,7 @@ font_lemonmilk = pygame.font.Font('assets/LEMONMILK-Regular.otf', 20)
 # Load all vehicles
 allVehicles = vh.Vehicles()
 i = 0
-while i < 30:
+while i < 55:
 	if i != 21:
 		allVehicles.vehicles[i].image = pygame.transform.rotate(allVehicles.vehicles[i].image, 180)
 	i += 1

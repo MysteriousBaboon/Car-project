@@ -43,7 +43,6 @@ game_state = "menu"
 
 
 # Will store all GameObject
-gameObject_list = {}
 player = pl.Player(speed=1, life=3, coordinates=(window_width / 2 - allVehicles.vehicles[player_index].width / 2, \
                                                  window_height - 50 - allVehicles.vehicles[player_index].height), \
                    size=(allVehicles.vehicles[player_index].width, allVehicles.vehicles[player_index].height))
@@ -79,7 +78,7 @@ while launched:
                 elif event.key == pygame.K_RIGHT:
                     player.move('Right')
 
-    player.check_all_collisions(gameObject_list)
+    player.check_all_collisions(list_bot)
     ds.display(game_state, window_surface, window_width,
                window_height, player, list_bot, font_lemonmilk, allVehicles, init_timer)
 

@@ -12,8 +12,10 @@ def step(key):
         allVehicles.vehicles[index[0]].x -= 10
     if key == "+index[0]":
     	index[0] += 1
+    	print(index[0])
     elif key == "-index[0]":
     	index[0] -= 1
+    	print(index[0])
 
 def display():
     # Color entire window with a certain color.
@@ -65,7 +67,7 @@ index = [0]
 clock = pygame.time.Clock()
 
 # Allow to hold the same key (arg in ms)
-pygame.key.set_repeat(1, 1)
+pygame.key.set_repeat(1000, 1000)
 
 # First display.
 display()

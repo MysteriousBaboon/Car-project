@@ -5,12 +5,21 @@ import player as pl
 import display as ds
 import bot
 import time
+import Roads
 
+
+def init_game():
+	player = pl.Player(speed=1, life=3, coordinates=(2,window_height - 50 - allVehicles.vehicles[player_index].height), \
+                   size=(allVehicles.vehicles[player_index].width, allVehicles.vehicles[player_index].height))
+	tmp_bot = bot.OneBot(vehicles=allVehicles.vehicles)
+	list_bot = []
+	list_bot.append(tmp_bot)
+	init_timer = time.time()
+	return init_timer, player, list_bot
 
 # Exemple loading a pic.
-button_surface = pygame.image.load('assets/button.png')
-
 pygame.init()
+button_surface = pygame.image.load('assets/button.png')
 
 # Loading a font.
 font_lemonmilk = pygame.font.Font('assets/LEMONMILK-Regular.otf', 20)
@@ -39,21 +48,10 @@ clock = pygame.time.Clock()
 pygame.key.set_repeat(1000, 1)
 
 game_state = "menu"
-
-
-
-# Will store all GameObject
-player = pl.Player(speed=1, life=3, coordinates=(window_width / 2 - allVehicles.vehicles[player_index].width / 2, \
-                                                 window_height - 50 - allVehicles.vehicles[player_index].height), \
-                   size=(allVehicles.vehicles[player_index].width, allVehicles.vehicles[player_index].height))
-
-bot = bot.OneBot(x=0, y=0, vehicles=allVehicles.vehicles)
-list_bot = []
-list_bot.append(bot)
-
+init_timer, player, list_bot = init_game()
+road = Roads.Roads(window_surface, window_width, window_height)
 # First display.
-init_timer = time.time()
-ds.display(game_state, window_surface,window_width,window_height, player, list_bot, font_lemonmilk, allVehicles, init_timer)
+ds.display(game_state, window_surface,window_width,window_height, player, list_bot, font_lemonmilk, allVehicles, init_timer, road)
 
 # Start mainloop.
 launched = True
@@ -70,17 +68,18 @@ while launched:
         elif event.type == pygame.KEYDOWN:
             if game_state == "menu":
                 if event.key == pygame.K_BACKSPACE:
+                    init_timer, player, list_bot = init_game()
                     game_state = "in_game"
-                    init_timer = time.time()
             elif game_state == "in_game":
                 if event.key == pygame.K_LEFT:
                     player.move('Left')
                 elif event.key == pygame.K_RIGHT:
                     player.move('Right')
 
-    player.check_all_collisions(list_bot)
+    if player.check_all_collisions(list_bot) == True:
+    	print("dead")
     ds.display(game_state, window_surface, window_width,
-               window_height, player, list_bot, font_lemonmilk, allVehicles, init_timer)
+               window_height, player, list_bot, font_lemonmilk, allVehicles, init_timer, road)
 
     # For fps.
     clock.tick(60)

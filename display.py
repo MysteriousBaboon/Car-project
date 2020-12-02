@@ -19,7 +19,7 @@ def display_scoreboard(window_surface,window_width, font, init_timer):
     window_surface.blit(value_txt, (200, 50 - value_txt.get_size()[1] / 2))
 
 
-def display(game_state, window_surface,window_width, window_height, player, list_bot, font, allVehicles, init_timer):
+def display(game_state, window_surface,window_width, window_height, player, list_bot, font, allVehicles, init_timer, road):
     if game_state == "menu":
         window_surface.fill(GREEN)
         cargame_txt = font.render("CAR GAME", True, BLACK)
@@ -30,9 +30,9 @@ def display(game_state, window_surface,window_width, window_height, player, list
     elif game_state == "in_game":
         # Color entire window with a certain color.
         window_surface.fill(GREEN)
-        display_road()
+        road.display(init_timer)
         window_surface.blit(allVehicles.vehicles[21].image,
-                            (player.x, player.y))
+                            (player.x * 100, player.y))
         i = 0
         while i < len(list_bot):
             list_bot[i].y += 2

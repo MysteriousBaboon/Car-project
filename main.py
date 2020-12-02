@@ -9,7 +9,7 @@ import Roads
 
 
 def init_game():
-	player = pl.Player(speed=1, life=3, coordinates=(2,window_height - 50 - allVehicles.vehicles[player_index].height), \
+	player = pl.Player(speed=1, life=1, coordinates=(2,window_height - 50 - allVehicles.vehicles[player_index].height), \
                    size=(allVehicles.vehicles[player_index].width, allVehicles.vehicles[player_index].height))
 	tmp_bot = bot.OneBot(vehicles=allVehicles.vehicles)
 	list_bot = []
@@ -66,7 +66,7 @@ while launched:
             if event.button == 1:
                 print("clic gauche")
         elif event.type == pygame.KEYDOWN:
-            if game_state == "menu":
+            if game_state == "menu" or game_state == "game_over":
                 if event.key == pygame.K_BACKSPACE:
                     init_timer, player, list_bot = init_game()
                     game_state = "in_game"
@@ -76,8 +76,9 @@ while launched:
                 elif event.key == pygame.K_RIGHT:
                     player.move('Right')
 
-    if player.check_all_collisions(list_bot) == True:
-    	print("dead")
+    if game_state == "in_game" and player.check_all_collisions(list_bot) == True:
+    	if player.hp <= 1:
+    		game_state = "game_over"
     ds.display(game_state, window_surface, window_width,
                window_height, player, list_bot, font_lemonmilk, allVehicles, init_timer, road)
 

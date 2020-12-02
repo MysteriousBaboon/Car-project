@@ -43,5 +43,14 @@ def display(game_state, window_surface,window_width, window_height, player, list
                 window_surface.blit(list_bot[i].image, (list_bot[i].x * 100, list_bot[i].y))
             i += 1
         display_scoreboard(window_surface,window_width, font, init_timer)
+
+    elif game_state == "game_over":
+        window_surface.fill(GREEN)
+        gameover_txt = font.render("GAME OVER", True, BLACK)
+        pressenter_txt = font.render("Press K_BACKSPACE to start.", True, BLACK)
+        window_surface.blit(gameover_txt, (window_width / 2 - gameover_txt.get_size()[0] / 2, 100))
+        window_surface.blit(pressenter_txt, (window_width / 2 - pressenter_txt.get_size()[0] / 2, 200))
+
+
     # Applies new changes on the display.
     pygame.display.flip()

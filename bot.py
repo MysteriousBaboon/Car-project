@@ -5,7 +5,7 @@ class OneBot(object):
 
     def __init__(self, x, y, vehicles):
         super(OneBot, self).__init__()
-        self.x = random.randint(0, 2)
+        self.x = random.randint(1, 3)
         self.y = 0
         rand = 21
         while rand == 21:

@@ -40,7 +40,7 @@ def display(game_state, window_surface,window_width, window_height, player, list
                 list_bot.pop(i)
                 i -= 1
             else:
-                window_surface.blit(list_bot[i].image, (list_bot[i].x, list_bot[i].y))
+                window_surface.blit(list_bot[i].image, (list_bot[i].x * 100, list_bot[i].y))
             i += 1
         display_scoreboard(window_surface,window_width, font, init_timer)
     # Applies new changes on the display.

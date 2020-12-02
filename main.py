@@ -8,11 +8,13 @@ def display_road():
 
 
 def display_scoreboard():
-    pass
-
-
-def display_vehicules():
-    pass
+    pygame.draw.rect(window_surface, BROWN, pygame.Rect(0, 0, window_width, 100))
+    pygame.draw.rect(window_surface, BLACK, pygame.Rect(0, 0, window_width, 100), 2)
+    score_txt = font_lemonmilk.render("Score :", True, BLACK)
+    window_surface.blit(score_txt, (100, 50 - score_txt.get_size()[1] / 2))
+    score = 10000
+    value_txt = font_lemonmilk.render(str(score), True, BLACK)
+    window_surface.blit(value_txt, (200, 50 - value_txt.get_size()[1] / 2))
 
 
 def display(game_state):
@@ -29,8 +31,7 @@ def display(game_state):
         window_surface.fill(GREEN)
 
         display_road()
-        display_scoreboard()
-        display_vehicules()
+        #display_vehicules()
 
         # Loading new texts.
         example_txt = font_lemonmilk.render("Example", True, BLACK)
@@ -44,6 +45,7 @@ def display(game_state):
         # Blit the users car. (Bumblebee)
         window_surface.blit(allVehicles.vehicles[player_index].image,
                             (player.x, player.y))
+        display_scoreboard()
 
     # Blit the surface "button_surface" on the main surface (window_surface) on coord x,y = 100,75.
     # For exemple we can control it.
@@ -54,6 +56,7 @@ def display(game_state):
 
 # Colors for display.
 WHITE, BLACK, GREEN, RED, GRAY = (255, 255, 255), (0, 0, 0), (0, 128, 0), (255, 0, 0), (224, 224, 224)
+BROWN = (160, 82, 45)
 
 # Exemple loading a pic.
 button_surface = pygame.image.load('assets/button.png')

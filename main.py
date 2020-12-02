@@ -77,10 +77,12 @@ while launched:
                 elif event.key == pygame.K_RIGHT:
                     player.move('Right')
 
-    if game_state == "in_game" and player.check_all_collisions(list_bot) == True:
-        if player.hp <= 1:
-            score = int((time.time() - init_timer) * 1000)
-            game_state = "game_over"
+    if game_state == "in_game":
+        list_bot = bot.add_bot(list_bot, allVehicles.vehicles)
+        if player.check_all_collisions(list_bot) == True:
+            if player.hp <= 1:
+                score = int((time.time() - init_timer) * 1000)
+                game_state = "game_over"
     ds.display(game_state, window_surface, window_width,
                window_height, player, list_bot, font_lemonmilk, allVehicles, init_timer, road, score=score)
 

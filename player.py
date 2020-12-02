@@ -28,7 +28,7 @@ class Player:
             vehicle_rect = pygame.Rect(vehicle.x, vehicle.y, 1, vehicle.height)
             #print("vehicule_rect = ", vehicle_rect)
             if player_rect.colliderect(vehicle_rect):
-                print("CA MARCHE")
+                self.hp -= 1
                 return True
         return False
 

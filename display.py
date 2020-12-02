@@ -19,13 +19,15 @@ def display_scoreboard(window_surface,window_width, font, init_timer):
     window_surface.blit(value_txt, (200, 50 - value_txt.get_size()[1] / 2))
 
 
-def display(game_state, window_surface,window_width, window_height, player, list_bot, font, allVehicles, init_timer, road):
+def display(game_state, window_surface,window_width, window_height, player, list_bot, font, allVehicles, init_timer, road, score=0):
     if game_state == "menu":
         window_surface.fill(GREEN)
         cargame_txt = font.render("CAR GAME", True, BLACK)
-        pressenter_txt = font.render("Press K_BACKSPACE to start.", True, BLACK)
+        pressenter_txt = font.render("Press Enter to start.", True, BLACK)
+        tuto_txt = font.render("Use Left and Right.", True, BLACK)
         window_surface.blit(cargame_txt, (window_width / 2 - cargame_txt.get_size()[0] / 2, 100))
-        window_surface.blit(pressenter_txt, (window_width / 2 - pressenter_txt.get_size()[0] / 2, 200))
+        window_surface.blit(tuto_txt, (window_width / 2 - tuto_txt.get_size()[0] / 2, 200))
+        window_surface.blit(pressenter_txt, (window_width / 2 - pressenter_txt.get_size()[0] / 2, 300))
 
     elif game_state == "in_game":
         # Color entire window with a certain color.
@@ -43,5 +45,16 @@ def display(game_state, window_surface,window_width, window_height, player, list
                 window_surface.blit(list_bot[i].image, (list_bot[i].x * 100, list_bot[i].y))
             i += 1
         display_scoreboard(window_surface,window_width, font, init_timer)
+
+    elif game_state == "game_over":
+        window_surface.fill(GREEN)
+        gameover_txt = font.render("GAME OVER", True, BLACK)
+        pressenter_txt = font.render("Press Enter to restart.", True, BLACK)
+        score_txt = font.render(f"Your score: {str(score)}", True, BLACK)
+        window_surface.blit(gameover_txt, (window_width / 2 - gameover_txt.get_size()[0] / 2, 100))
+        window_surface.blit(pressenter_txt, (window_width / 2 - pressenter_txt.get_size()[0] / 2, 200))
+        window_surface.blit(score_txt, (window_width / 2 - score_txt.get_size()[0] / 2, 300))
+
+
     # Applies new changes on the display.
     pygame.display.flip()

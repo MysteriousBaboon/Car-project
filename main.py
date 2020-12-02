@@ -3,19 +3,13 @@ import vehicles as vh
 
 def step(key):
     if key == "up":
-        allVehicles.vehicles[index[0]].y -= 10
+        allVehicles.vehicles[player_index].y -= 10
     elif key == "down":
-         allVehicles.vehicles[index[0]].y += 10
+         allVehicles.vehicles[player_index].y += 10
     elif key == "right":
-        allVehicles.vehicles[index[0]].x += 10
+        allVehicles.vehicles[player_index].x += 10
     elif key == "left":
-        allVehicles.vehicles[index[0]].x -= 10
-    if key == "+index[0]":
-    	index[0] += 1
-    	print(index[0])
-    elif key == "-index[0]":
-    	index[0] -= 1
-    	print(index[0])
+        allVehicles.vehicles[player_index].x -= 10
 
 def display():
     # Color entire window with a certain color.
@@ -30,8 +24,8 @@ def display():
     window_surface.blit(size_example_txt, (100, 225))
     window_surface.blit(manuel_txt, (100, 275))
     # Load one vehicule
-    window_surface.blit(allVehicles.getListVehicules()[index[0]].getImage(), (allVehicles.vehicles[index[0]].x, allVehicles.vehicles[index[0]].y))
-    window_surface.blit(allVehicles.sprite_sheet, (0, 0))
+    # Blit the users car. (Bumblebee)
+    window_surface.blit(allVehicles.getListVehicules()[player_index].getImage(), (allVehicles.vehicles[player_index].x, allVehicles.vehicles[player_index].y))
 
     # Blit the surface "button_surface" on the main surface (window_surface) on coord x,y = 100,75.
     # For exemple we can control it.
@@ -62,13 +56,13 @@ font_lemonmilk = pygame.font.Font('assets/LEMONMILK-Regular.otf', 20)
 allVehicles = vh.Vehicles()
 for vehicle in allVehicles.getListVehicules():
     print(vehicle)
-index = [0]
+player_index = 21
 
 # clock is for fps
 clock = pygame.time.Clock()
 
 # Allow to hold the same key (arg in ms)
-pygame.key.set_repeat(1000, 1000)
+pygame.key.set_repeat(10, 10)
 
 # First display.
 display()
@@ -95,10 +89,6 @@ while launched:
                 step("left")
             elif event.key == pygame.K_RIGHT:
                 step("right")
-            elif event.key == pygame.K_c:
-                step("+index[0]")
-            elif event.key == pygame.K_v:
-                step("-index[0]")
             display()
 
     # For fps.

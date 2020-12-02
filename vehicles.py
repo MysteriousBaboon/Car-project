@@ -1,6 +1,5 @@
 import pygame
 
-
 class Vehicle:
     def setName(self, name):
         self.name = name
@@ -24,7 +23,7 @@ class Vehicle:
         self.height = int(hw[1])
 
     def setImage(self, image):
-        self.image = self.image
+        self.image = image
 
     def getImage(self):
         return self.image

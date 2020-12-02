@@ -1,8 +1,30 @@
 import pygame
+import sys
+import pygame.sprite as sprite
 
-class Road:
-    def setLocation(self, xy):
-    # print(xy)
-    xy = xy.split(",")
-    self.x = int(xy[0])
-    self.y = int(xy[1])
+theClock = pygame.time.Clock()
+
+background = pygame.image.load('background.gif')
+
+background_size = background.get_size()
+background_rect = background.get_rect()
+screen = pygame.display.set_mode(background_size)
+x = 0
+y = 0
+w,h = background_size
+running = True
+
+while running:
+    screen.blit(background,background_rect)
+    pygame.display.update()
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    if(y > h):
+        y = 0
+    else:
+        y += 5
+    screen.blit(background,(x,y))
+    pygame.display.flip()
+    pygame.display.update()
+    theClock.tick(10)

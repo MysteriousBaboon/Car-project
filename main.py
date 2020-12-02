@@ -63,9 +63,6 @@ while launched:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             launched = False
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:
-                print("clic gauche")
         elif event.type == pygame.KEYDOWN:
             if game_state == "menu" or game_state == "game_over":
                 if event.key == pygame.K_RETURN:
@@ -78,7 +75,7 @@ while launched:
                     player.move('Right')
 
     if game_state == "in_game":
-        list_bot = bot.add_bot(list_bot, allVehicles.vehicles)
+        list_bot = bot.rand_add_bot(list_bot, allVehicles.vehicles)
         if player.check_all_collisions(list_bot) == True:
             if player.hp <= 1:
                 score = int((time.time() - init_timer) * 1000)

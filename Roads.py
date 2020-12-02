@@ -1,27 +1,30 @@
-class Road :
-    def __init__(self):
+import pygame
+
+
+class Roads:
+
+    def __init__(self, window_width, window_height):
         self.surfaceSize = 96
-        self.roadGreen = pygame.image.load('assets/Roads/redim/Green Grass.png')
-        self.roadPass = pygame.image.load('assets/Roads/redim/Road_Pass.png')
-        self.roadBorder = pygame.image.load('assets/Roads/redim/Road_No Pass Double.png')
+        self.window_width = window_width
+        self.window_height = window_height
+        self.roadGreen = pygame.image.load('assets/Roads/Green.jpg')
+        self.roadPass = pygame.image.load('assets/Roads/RoadPass.jpg')
+        self.roadBorder = pygame.image.load('assets/Roads/RoadNoPass.jpg')
 
 
 
+    def display(self, speed):
+
+        for col in range(0, self.window_width, self.surfaceSize):
+            for row in range(0, self.window_height, self.surfaceSize):
+                self.window_surface.blit(self.roadGreen, (col, row))
+
+        for col in range(self.surfaceSize, self.window_width - self.surfaceSize, self.surfaceSize):
+            for row in range(0, window_height, self.surfaceSize):
+                if col == self.surfaceSize * 1 or col == self.surfaceSize * 4:
+                    self.window_height.blit(roadBorder, (col, row))
+                else:
+                    window_surface.blit(roadPass, (col, row))
 
 
-def display_road():
-    surfaceSize = 96
-    roadGreen = pygame.image.load('assets/Roads/redim/Green Grass.png')
-    roadPass = pygame.image.load('assets/Roads/redim/Road_Pass.png')
-    roadBorder = pygame.image.load('assets/Roads/redim/Road_No Pass Double.png')
-
-    for col in range(0, window_width, surfaceSize):
-        for row in range(0, window_height, surfaceSize):
-            window_surface.blit(roadGreen, (col, row))
-
-    for col in range(surfaceSize, window_width - surfaceSize, surfaceSize):
-        for row in range(0, window_height, surfaceSize):
-            if col == surfaceSize * 1 or col == surfaceSize * 4:
-                window_surface.blit(roadBorder, (col, row))
-            else:
-                window_surface.blit(roadPass, (col, row))
+roads = Roads(800, 600)

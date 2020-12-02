@@ -23,7 +23,7 @@ def display(game_state, window_surface,window_width, window_height, player, list
     if game_state == "menu":
         window_surface.fill(GREEN)
         cargame_txt = font.render("CAR GAME", True, BLACK)
-        pressenter_txt = font.render("Press K_BACKSPACE to start.", True, BLACK)
+        pressenter_txt = font.render("Press Enter to start.", True, BLACK)
         window_surface.blit(cargame_txt, (window_width / 2 - cargame_txt.get_size()[0] / 2, 100))
         window_surface.blit(pressenter_txt, (window_width / 2 - pressenter_txt.get_size()[0] / 2, 200))
 
@@ -47,7 +47,7 @@ def display(game_state, window_surface,window_width, window_height, player, list
     elif game_state == "game_over":
         window_surface.fill(GREEN)
         gameover_txt = font.render("GAME OVER", True, BLACK)
-        pressenter_txt = font.render("Press K_BACKSPACE to restart.", True, BLACK)
+        pressenter_txt = font.render("Press Enter to restart.", True, BLACK)
         score_txt = font.render(f"Your score: {str(score)}", True, BLACK)
         window_surface.blit(gameover_txt, (window_width / 2 - gameover_txt.get_size()[0] / 2, 100))
         window_surface.blit(pressenter_txt, (window_width / 2 - pressenter_txt.get_size()[0] / 2, 200))

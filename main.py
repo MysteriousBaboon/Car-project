@@ -68,7 +68,7 @@ while launched:
                 print("clic gauche")
         elif event.type == pygame.KEYDOWN:
             if game_state == "menu" or game_state == "game_over":
-                if event.key == pygame.K_BACKSPACE:
+                if event.key == pygame.K_RETURN:
                     init_timer, player, list_bot = init_game()
                     game_state = "in_game"
             elif game_state == "in_game":

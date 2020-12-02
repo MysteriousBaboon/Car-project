@@ -1,5 +1,6 @@
 import pygame
 
+
 class Vehicle:
     def setName(self, name):
         self.name = name
@@ -106,3 +107,26 @@ class Vehicles:
 
     def getListVehicules(self):
         return self.vehicles
+
+
+def check_all_collisions(player, gameobject_list):
+    player_rect = pygame.Rect(player.x, player.y, player.width, player.height)
+
+    for vehicle in gameobject_list:
+        vehicle_rect = pygame.Rect(vehicle.x, vehicle.y, vehicle.width, vehicle.height)
+        if player_rect.colliderect(vehicle_rect):
+            print("CA MARCHE")
+
+
+def check_collision_border(side, player):
+    if side == "Left":
+        if player.x < 10:
+            return False
+        else:
+            return True
+    elif side == "Right":
+        pass
+    elif side == "Bottom":
+        pass
+    elif side == "Top":
+        pass

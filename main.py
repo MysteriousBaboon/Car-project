@@ -1,17 +1,6 @@
 import pygame
 import vehicles as vh
-
-
-def step(pos, key):
-    if key == "up":
-        pos[1] -= 10
-    elif key == "down":
-        pos[1] += 10
-    elif key == "right":
-        pos[0] += 10
-    elif key == "left":
-        pos[0] -= 10
-    return pos
+import player as pl
 
 
 def display(pos):
@@ -60,6 +49,7 @@ allVehicles = vh.Vehicles()
 for vehicle in allVehicles.getListVehicules():
     print(vehicle)
 
+
 # clock is for fps
 clock = pygame.time.Clock()
 
@@ -74,8 +64,11 @@ display(pos)
 
 # Start mainloop.
 launched = True
-while launched:
 
+# Will store all GameObject
+gameObject_list = {}
+player = pl.Player(speed=10, life=3, coordinates=(100, 100), size=(50, 50))
+while launched:
     # Collect and use events for user.
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -87,15 +80,16 @@ while launched:
             if event.key == pygame.K_a:
                 print(event.key)
             elif event.key == pygame.K_UP:
-                pos = step(pos, "up")
+                player.move('up')
             elif event.key == pygame.K_DOWN:
-                pos = step(pos, "down")
-            elif event.key == pygame.K_LEFT:
-                pos = step(pos, "left")
+                player.move('down')
+            elif event.key == pygame.K_LEFT and vh.check_collision_border("Left", player):
+                player.move('left')
             elif event.key == pygame.K_RIGHT:
-                pos = step(pos, "right")
+                player.move('right')
             display(pos)
 
+    vh.check_all_collisions(player, gameObject_list)
     # For fps.
     clock.tick(60)
 

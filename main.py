@@ -19,7 +19,7 @@ def display_scoreboard():
 
 def display_vehicules():
 	pass
-	
+
 def display(game_state):
 	if game_state == "menu":
 		window_surface.fill(GREEN)
@@ -47,7 +47,7 @@ def display(game_state):
 		window_surface.blit(manuel_txt, (100, 275))
 		# Load one vehicule
 		# Blit the users car. (Bumblebee)
-		window_surface.blit(allVehicles.getListVehicules()[player_index].getImage(), (allVehicles.vehicles[player_index].x, allVehicles.vehicles[player_index].y))
+		window_surface.blit(allVehicles.vehicles[player_index].image, (allVehicles.vehicles[player_index].x, allVehicles.vehicles[player_index].y))
 
 		# Blit the surface "button_surface" on the main surface (window_surface) on coord x,y = 100,75.
    		# For exemple we can control it.
@@ -71,11 +71,16 @@ window_width, window_height = 480, 680
 pygame.display.set_caption("Car Project")
 window_surface = pygame.display.set_mode((window_width, window_height))
 
-# Exemple loading a font for display.
+# Loading a font.
 font_lemonmilk = pygame.font.Font('assets/LEMONMILK-Regular.otf', 20)
 
 # Load all vehicles
 allVehicles = vh.Vehicles()
+i = 0
+while i < 55:
+	if i != 21:
+		allVehicles.vehicles[i].image = pygame.transform.rotate(allVehicles.vehicles[i].image, 180)
+	i += 1
 player_index = 21
 
 # clock is for fps

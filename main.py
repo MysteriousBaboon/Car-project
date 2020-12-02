@@ -63,9 +63,6 @@ while launched:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             launched = False
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:
-                print("clic gauche")
         elif event.type == pygame.KEYDOWN:
             if game_state == "menu" or game_state == "game_over":
                 if event.key == pygame.K_RETURN:

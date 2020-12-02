@@ -1,59 +1,55 @@
 import pygame
 import vehicles as vh
+import player as pl
 
-def step(key):
-    if key == "up":
-        allVehicles.vehicles[player_index].y -= 1
-    elif key == "down":
-         allVehicles.vehicles[player_index].y += 1
-    elif key == "right":
-        allVehicles.vehicles[player_index].x += 1
-    elif key == "left":
-        allVehicles.vehicles[player_index].x -= 1
 
 def display_road():
-	pass
+    pass
+
 
 def display_scoreboard():
-	pass
+    pass
+
 
 def display_vehicules():
-	pass
+    pass
+
 
 def display(game_state):
-	if game_state == "menu":
-		window_surface.fill(GREEN)
-		cargame_txt = font_lemonmilk.render("CAR GAME", True, BLACK)
-		pressenter_txt = font_lemonmilk.render("Press K_BACKSPACE to start.", True, BLACK)
+    if game_state == "menu":
+        window_surface.fill(GREEN)
+        cargame_txt = font_lemonmilk.render("CAR GAME", True, BLACK)
+        pressenter_txt = font_lemonmilk.render("Press K_BACKSPACE to start.", True, BLACK)
 
-		window_surface.blit(cargame_txt, (100, 100))
-		window_surface.blit(pressenter_txt, (100, 200))
+        window_surface.blit(cargame_txt, (window_width / 2 - cargame_txt.get_size()[0] / 2, 100))
+        window_surface.blit(pressenter_txt, (window_width / 2 - pressenter_txt.get_size()[0] / 2, 200))
 
-	elif game_state == "in_game":
-		# Color entire window with a certain color.
-		window_surface.fill(GREEN)
+    elif game_state == "in_game":
+        # Color entire window with a certain color.
+        window_surface.fill(GREEN)
 
-		display_road()
-		display_scoreboard()
-		display_vehicules()
+        display_road()
+        display_scoreboard()
+        display_vehicules()
 
-		# Loading new texts.
-		example_txt = font_lemonmilk.render("Example", True, BLACK)
-		size_example_txt = font_lemonmilk.render("size of example : " + str(example_txt.get_size()), True, BLACK)
-		manuel_txt = font_lemonmilk.render("Use UP DOWN LEFT RIGHT key", True, BLACK)
-		# Blit new texts.
-		window_surface.blit(example_txt, (100, 175))
-		window_surface.blit(size_example_txt, (100, 225))
-		window_surface.blit(manuel_txt, (100, 275))
-		# Load one vehicule
-		# Blit the users car. (Bumblebee)
-		window_surface.blit(allVehicles.vehicles[player_index].image, (allVehicles.vehicles[player_index].x, allVehicles.vehicles[player_index].y))
+        # Loading new texts.
+        example_txt = font_lemonmilk.render("Example", True, BLACK)
+        size_example_txt = font_lemonmilk.render("size of example : " + str(example_txt.get_size()), True, BLACK)
+        manuel_txt = font_lemonmilk.render("Use UP DOWN LEFT RIGHT key", True, BLACK)
+        # Blit new texts.
+        window_surface.blit(example_txt, (100, 175))
+        window_surface.blit(size_example_txt, (100, 225))
+        window_surface.blit(manuel_txt, (100, 275))
+        # Load one vehicule
+        # Blit the users car. (Bumblebee)
+        window_surface.blit(allVehicles.vehicles[player_index].image,
+                            (player.x, player.y))
 
-		# Blit the surface "button_surface" on the main surface (window_surface) on coord x,y = 100,75.
-   		# For exemple we can control it.
+    # Blit the surface "button_surface" on the main surface (window_surface) on coord x,y = 100,75.
+    # For exemple we can control it.
 
-	# Applies new changes on the display.
-	pygame.display.flip()
+    # Applies new changes on the display.
+    pygame.display.flip()
 
 
 # Colors for display.
@@ -78,9 +74,9 @@ font_lemonmilk = pygame.font.Font('assets/LEMONMILK-Regular.otf', 20)
 allVehicles = vh.Vehicles()
 i = 0
 while i < 55:
-	if i != 21:
-		allVehicles.vehicles[i].image = pygame.transform.rotate(allVehicles.vehicles[i].image, 180)
-	i += 1
+    if i != 21:
+        allVehicles.vehicles[i].image = pygame.transform.rotate(allVehicles.vehicles[i].image, 180)
+    i += 1
 player_index = 21
 
 # clock is for fps
@@ -94,10 +90,15 @@ game_state = "menu"
 # First display.
 display(game_state)
 
+# Will store all GameObject
+gameObject_list = {}
+player = pl.Player(speed=1, life=3, coordinates=(100, 100), size=(50, 50))
+
 # Start mainloop.
 launched = True
 while launched:
 
+    # Collect and use events for user.
     # Collect and use events for user.
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -106,21 +107,19 @@ while launched:
             if event.button == 1:
                 print("clic gauche")
         elif event.type == pygame.KEYDOWN:
-        	if game_state == "menu":
-        		if event.key == pygame.K_BACKSPACE:
-        			game_state = "in_game"
-        	if game_state == "in_game":
-        		if event.key == pygame.K_a:
-        			print(event.key)
-        		elif event.key == pygame.K_UP:
-        			step("up")
-        		elif event.key == pygame.K_DOWN:
-        			step("down")
-        		elif event.key == pygame.K_LEFT:
-        			step("left")
-        		elif event.key == pygame.K_RIGHT:
-        			step("right")
-    
+            if event.key == pygame.K_BACKSPACE:
+                game_state = "in_game"
+            elif event.key == pygame.K_UP:
+                player.move('up')
+            elif event.key == pygame.K_DOWN:
+                player.move('down')
+            elif event.key == pygame.K_LEFT and player.check_collision_border("Left"):
+                player.move('left')
+            elif event.key == pygame.K_RIGHT:
+                player.move('right')
+    player.check_all_collisions(gameObject_list)
+
+
     display(game_state)
 
     # For fps.
@@ -128,3 +127,4 @@ while launched:
 
 # Force exit program
 pygame.display.quit()
+

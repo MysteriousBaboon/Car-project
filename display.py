@@ -32,7 +32,8 @@ def display(game_state, window_surface,window_width, window_height, player, list
     elif game_state == "in_game":
         # Color entire window with a certain color.
         window_surface.fill(GREEN)
-        road.display(init_timer)
+        #time.time() - init_timer
+        road.display(4)
         window_surface.blit(allVehicles.vehicles[21].image, (player.x * 85 + 100, player.y))
         i = 0
         while i < len(list_bot):

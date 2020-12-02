@@ -23,7 +23,8 @@ class Player:
     def check_all_collisions(self, list_bot):
         player_rect = pygame.Rect(self.x, self.y, 1, self.height)
         #print("player_rect = ", player_rect)
-
+        if len(list_bot) == 0:
+            return False
         for vehicle in list_bot:
             vehicle_rect = pygame.Rect(vehicle.x, vehicle.y, 1, vehicle.height)
             #print("vehicule_rect = ", vehicle_rect)

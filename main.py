@@ -9,13 +9,15 @@ import Roads
 
 
 def init_game():
-    player = pl.Player(speed=1, life=1, coordinates=(2,window_height - 50 - allVehicles.vehicles[player_index].height), \
+    player = pl.Player(speed=1, life=1, coordinates=(2, window_height - 50 - allVehicles.vehicles[player_index].height), \
                    size=(allVehicles.vehicles[player_index].width, allVehicles.vehicles[player_index].height))
     tmp_bot = bot.OneBot(vehicles=allVehicles.vehicles)
     list_bot = []
     list_bot.append(tmp_bot)
     init_timer = time.time()
-    return init_timer, player, list_bot
+    index_row = 0
+    last_row = -1
+    return init_timer, player, list_bot, index_row, last_row
 
 # Exemple loading a pic.
 pygame.init()
@@ -28,17 +30,12 @@ icon_surface = pygame.image.load('assets/icon.ico')
 pygame.display.set_icon(icon_surface)
 
 # Creating window. window_surface is the surface we're gonna write on.
-window_width, window_height = 480, 680
+window_width, window_height = 6*96, 7*96
 pygame.display.set_caption("Car Project")
 window_surface = pygame.display.set_mode((window_width, window_height))
 
 # Load all vehicles
 allVehicles = vh.Vehicles()
-i = 0
-while i < 55:
-    if i != 21:
-        allVehicles.vehicles[i].image = pygame.transform.rotate(allVehicles.vehicles[i].image, 180)
-    i += 1
 player_index = 21
 
 # clock is for fps
@@ -48,7 +45,7 @@ clock = pygame.time.Clock()
 pygame.key.set_repeat(1000, 1)
 
 game_state = "menu"
-init_timer, player, list_bot = init_game()
+init_timer, player, list_bot, index_row, last_row = init_game()
 score = init_timer
 road = Roads.Roads(window_surface, window_width, window_height)
 # First display.
@@ -66,7 +63,7 @@ while launched:
         elif event.type == pygame.KEYDOWN:
             if game_state == "menu" or game_state == "game_over":
                 if event.key == pygame.K_RETURN:
-                    init_timer, player, list_bot = init_game()
+                    init_timer, player, list_bot, index_row, last_row = init_game()
                     game_state = "in_game"
             elif game_state == "in_game":
                 if event.key == pygame.K_LEFT:
@@ -75,7 +72,8 @@ while launched:
                     player.move('Right')
 
     if game_state == "in_game":
-        list_bot = bot.rand_add_bot(list_bot, allVehicles.vehicles)
+        index_row += 4
+        list_bot, last_row = bot.rand_add_bot(list_bot, allVehicles.vehicles, int(index_row / 96), last_row)
         if player.check_all_collisions(list_bot) == True:
             if player.hp <= 1:
                 score = int((time.time() - init_timer) * 1000)

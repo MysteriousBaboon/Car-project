@@ -26,8 +26,8 @@ def display(game_state):
 		cargame_txt = font_lemonmilk.render("CAR GAME", True, BLACK)
 		pressenter_txt = font_lemonmilk.render("Press K_BACKSPACE to start.", True, BLACK)
 
-		window_surface.blit(cargame_txt, (100, 100))
-		window_surface.blit(pressenter_txt, (100, 200))
+		window_surface.blit(cargame_txt, (window_width / 2 - cargame_txt.get_size()[0] / 2, 100))
+        window_surface.blit(pressenter_txt, (window_width / 2 - pressenter_txt.get_size()[0] / 2, 200))
 
 	elif game_state == "in_game":
 		# Color entire window with a certain color.

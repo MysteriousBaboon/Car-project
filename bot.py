@@ -19,15 +19,21 @@ class OneBot(object):
         self.height = self.image.get_size()[1]
 
 def add_bot(list_bot, vehicles):
-    if len(list_bot) < 3:
-        done = False
-        while done == False:
-            rand = random.randint(1, 3)
-            done = True
-            for i in list_bot:
-                if i.x == rand and i.y <= 100:
-                    done = False
-                    break
-            if done == True:
-                list_bot.append(OneBot(vehicles, x=rand))
+    done = False
+    count = 0
+    while done == False and count <= 100:
+        rand = random.randint(1, 3)
+        done = True
+        for i in list_bot:
+            if i.x == rand and i.y <= 100:
+                done = False
+                break
+        if done == True:
+            list_bot.append(OneBot(vehicles, x=rand))
+        count += 1
+    return list_bot
+
+def rand_add_bot(list_bot, vehicles):
+    if len(list_bot) < 2:
+        list_bot = add_bot(list_bot, vehicles)
     return list_bot

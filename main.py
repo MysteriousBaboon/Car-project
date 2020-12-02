@@ -75,7 +75,7 @@ while launched:
                     player.move('Right')
 
     if game_state == "in_game":
-        list_bot = bot.add_bot(list_bot, allVehicles.vehicles)
+        list_bot = bot.rand_add_bot(list_bot, allVehicles.vehicles)
         if player.check_all_collisions(list_bot) == True:
             if player.hp <= 1:
                 score = int((time.time() - init_timer) * 1000)

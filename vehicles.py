@@ -9,7 +9,7 @@ class Vehicle:
         self.width = 0
         self.height = 0
         rect = pygame.Rect((self.x, self.y, self.width, self.height))
-        self.image = pygame.Surface(rect.size).convert()
+        self.image = pygame.Surface(rect.size)
 
     def setLocation(self, xy):
         # print(xy)
@@ -41,7 +41,7 @@ class Vehicles:
     def __init__(self):
         """ Constructor. Pass in the file name of the sprite sheet. """
         # Load the sprite sheet.
-        self.sprite_sheet = pygame.image.load('assets/Cars/cars.png').convert()
+        self.sprite_sheet = pygame.image.load('assets/Cars/cars.png')
 
         filepath = 'assets/Cars/cars.txt'
 
@@ -61,7 +61,7 @@ class Vehicles:
                 # print("Line{}: End")
                 # Add new vehicle
                 rect = pygame.Rect((newVehicle.x, newVehicle.y, newVehicle.width, newVehicle.height))
-                image = pygame.Surface(rect.size).convert()
+                image = pygame.Surface(rect.size)
                 image.blit(self.sprite_sheet, (0, 0), rect)
                 newVehicle.setImage(image)
                 self.vehicles.append(newVehicle)
@@ -73,7 +73,7 @@ class Vehicles:
                 if not firstVehicle:
                     # Add new vehicle
                     rect = pygame.Rect((newVehicle.x, newVehicle.y, newVehicle.width, newVehicle.height))
-                    image = pygame.Surface(rect.size).convert()
+                    image = pygame.Surface(rect.size)
                     image.blit(self.sprite_sheet, (0, 0), rect)
                     newVehicle.setImage(image)
                     self.vehicles.append(newVehicle)
@@ -96,7 +96,7 @@ class Vehicles:
             Pass in the x, y location of the sprite
             and the width and height of the sprite. """
         # Create a new blank image
-        image = pygame.Surface([width, height]).convert()
+        image = pygame.Surface([width, height])
         # Copy the sprite from the large sheet onto the smaller image
         image.blit(self.sprite_sheet, (0, 0), (x, y, width, height))
         # Return the image

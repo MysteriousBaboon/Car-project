@@ -12,15 +12,22 @@ class Player:
         self.width = size[0]
         self.height = size[1]
 
+        self.index = 0
+
     def move(self, key):
-        if key == "up":
-            self.y -= self.speed
-        elif key == "down":
-            self.y += self.speed
-        elif key == "right":
-            self.x += self.speed
-        elif key == "left":
-            self.x -= self.speed
+        if key == "Left":
+            if self.index > 0:
+                self.index -= 1
+        if key == "Right":
+            if self.index < 2:
+                self.index += 1
+
+        if self.index == 0:
+            self.x = 100
+        elif self.index == 1:
+            self.x = 200
+        elif self.index == 2:
+            self.x = 300
 
     def check_all_collisions(self,gameobject_list):
         player_rect = pygame.Rect(self.x, self.y, self.width, self.height)
@@ -30,24 +37,3 @@ class Player:
             if player_rect.colliderect(vehicle_rect):
                 print("CA MARCHE")
 
-    def check_collision_border(self, side, dimension):
-        if side == "Left":
-            if self.x < dimension + 5:
-                return False
-            else:
-                return True
-        elif side == "Right":
-            if self.x > dimension - 5:
-                return False
-            else:
-                return True
-        elif side == "Bottom":
-            if self.y < dimension - 30:
-                return True
-            else:
-                return False
-        elif side == "Top":
-            if self.y < dimension + 30:
-                return False
-            else:
-                return True

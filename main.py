@@ -112,13 +112,13 @@ while launched:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_BACKSPACE:
                 game_state = "in_game"
-            elif event.key == pygame.K_UP:
+            elif event.key == pygame.K_UP and player.check_collision_border("Top", 0):
                 player.move('up')
-            elif event.key == pygame.K_DOWN:
+            elif event.key == pygame.K_DOWN and player.check_collision_border("Bottom", window_height):
                 player.move('down')
-            elif event.key == pygame.K_LEFT and player.check_collision_border("Left"):
+            elif event.key == pygame.K_LEFT and player.check_collision_border("Left", 0):
                 player.move('left')
-            elif event.key == pygame.K_RIGHT:
+            elif event.key == pygame.K_RIGHT and player.check_collision_border("Right", window_width):
                 player.move('right')
     player.check_all_collisions(gameObject_list)
 

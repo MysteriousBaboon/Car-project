@@ -1,4 +1,6 @@
 import pygame
+
+
 class Player:
     def __init__(self, speed=1, life=1, coordinates=(0, 0), size=(0, 0)):
         self.hp = life
@@ -28,16 +30,24 @@ class Player:
             if player_rect.colliderect(vehicle_rect):
                 print("CA MARCHE")
 
-
-    def check_collision_border(self, side):
+    def check_collision_border(self, side, dimension):
         if side == "Left":
-            if self.x < 10:
+            if self.x < dimension + 5:
                 return False
             else:
                 return True
         elif side == "Right":
-            pass
+            if self.x > dimension - 5:
+                return False
+            else:
+                return True
         elif side == "Bottom":
-            pass
+            if self.y < dimension - 30:
+                return True
+            else:
+                return False
         elif side == "Top":
-            pass
+            if self.y < dimension + 30:
+                return False
+            else:
+                return True

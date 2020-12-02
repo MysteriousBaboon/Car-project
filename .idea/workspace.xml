@@ -21,7 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1126b16b-ace3-4cb1-b948-cc1829ed601d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Road.py" beforeDir="false" afterPath="$PROJECT_DIR$/Road.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,15 +46,37 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Game cube" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../../Game cube" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Test">
+  <component name="RunManager" selected="Python.Road">
+    <configuration name="Road" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Car-project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Road.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Car-project" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -97,8 +119,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Car-project" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../Game cube" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../../Game cube/test main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Road" />
+        <item itemvalue="Python.test main" />
         <item itemvalue="Python.Test" />
         <item itemvalue="Python.main" />
       </list>
@@ -132,25 +177,25 @@
       <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="177" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog/72.27.1294.741@72.27.1294.741" timestamp="1606911340798" />
-    <state width="1279" height="109" key="GridCell.Tab.0.bottom" timestamp="1606914195846">
+    <state width="1279" height="109" key="GridCell.Tab.0.bottom" timestamp="1606915209916">
       <screen x="64" y="27" width="1302" height="741" />
     </state>
-    <state width="1279" height="109" key="GridCell.Tab.0.bottom/64.27.1302.741@64.27.1302.741" timestamp="1606914195846" />
+    <state width="1279" height="109" key="GridCell.Tab.0.bottom/64.27.1302.741@64.27.1302.741" timestamp="1606915209916" />
     <state width="1271" height="172" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1606912435686" />
-    <state width="1279" height="109" key="GridCell.Tab.0.center" timestamp="1606914195846">
+    <state width="1279" height="109" key="GridCell.Tab.0.center" timestamp="1606915209915">
       <screen x="64" y="27" width="1302" height="741" />
     </state>
-    <state width="1279" height="109" key="GridCell.Tab.0.center/64.27.1302.741@64.27.1302.741" timestamp="1606914195846" />
+    <state width="1279" height="109" key="GridCell.Tab.0.center/64.27.1302.741@64.27.1302.741" timestamp="1606915209915" />
     <state width="1271" height="172" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1606912435685" />
-    <state width="1279" height="109" key="GridCell.Tab.0.left" timestamp="1606914195845">
+    <state width="1279" height="109" key="GridCell.Tab.0.left" timestamp="1606915209915">
       <screen x="64" y="27" width="1302" height="741" />
     </state>
-    <state width="1279" height="109" key="GridCell.Tab.0.left/64.27.1302.741@64.27.1302.741" timestamp="1606914195845" />
+    <state width="1279" height="109" key="GridCell.Tab.0.left/64.27.1302.741@64.27.1302.741" timestamp="1606915209915" />
     <state width="1271" height="172" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1606912435685" />
-    <state width="1279" height="109" key="GridCell.Tab.0.right" timestamp="1606914195846">
+    <state width="1279" height="109" key="GridCell.Tab.0.right" timestamp="1606915209915">
       <screen x="64" y="27" width="1302" height="741" />
     </state>
-    <state width="1279" height="109" key="GridCell.Tab.0.right/64.27.1302.741@64.27.1302.741" timestamp="1606914195846" />
+    <state width="1279" height="109" key="GridCell.Tab.0.right/64.27.1302.741@64.27.1302.741" timestamp="1606915209915" />
     <state width="1271" height="172" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1606912435686" />
     <state x="208" y="31" width="1022" height="737" key="SettingsEditor" timestamp="1606911778783">
       <screen x="72" y="27" width="1294" height="741" />

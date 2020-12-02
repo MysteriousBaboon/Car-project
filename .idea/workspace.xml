@@ -49,7 +49,12 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -59,7 +64,7 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="$USER_HOME$/PycharmProjects/pythonProject/venv/bin/python" />
+      <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -103,41 +108,38 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1279" height="109" key="GridCell.Tab.0.bottom" timestamp="1606907573854">
-      <screen x="64" y="27" width="1302" height="741" />
+    <state x="177" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606911340798">
+      <screen x="72" y="27" width="1294" height="741" />
+    </state>
+    <state x="177" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog/72.27.1294.741@72.27.1294.741" timestamp="1606911340798" />
+    <state width="1271" height="172" key="GridCell.Tab.0.bottom" timestamp="1606912435686">
+      <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state width="1279" height="109" key="GridCell.Tab.0.bottom/64.27.1302.741@64.27.1302.741" timestamp="1606907573854" />
-    <state width="1279" height="109" key="GridCell.Tab.0.center" timestamp="1606907573854">
-      <screen x="64" y="27" width="1302" height="741" />
+    <state width="1271" height="172" key="GridCell.Tab.0.bottom/72.27.1294.741@72.27.1294.741" timestamp="1606912435686" />
+    <state width="1271" height="172" key="GridCell.Tab.0.center" timestamp="1606912435685">
+      <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state width="1279" height="109" key="GridCell.Tab.0.center/64.27.1302.741@64.27.1302.741" timestamp="1606907573854" />
-    <state width="1279" height="109" key="GridCell.Tab.0.left" timestamp="1606907573853">
-      <screen x="64" y="27" width="1302" height="741" />
+    <state width="1271" height="172" key="GridCell.Tab.0.center/72.27.1294.741@72.27.1294.741" timestamp="1606912435685" />
+    <state width="1271" height="172" key="GridCell.Tab.0.left" timestamp="1606912435685">
+      <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state width="1279" height="109" key="GridCell.Tab.0.left/64.27.1302.741@64.27.1302.741" timestamp="1606907573853" />
-    <state width="1279" height="109" key="GridCell.Tab.0.right" timestamp="1606907573854">
-      <screen x="64" y="27" width="1302" height="741" />
+    <state width="1271" height="172" key="GridCell.Tab.0.left/72.27.1294.741@72.27.1294.741" timestamp="1606912435685" />
+    <state width="1271" height="172" key="GridCell.Tab.0.right" timestamp="1606912435686">
+      <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state width="1279" height="109" key="GridCell.Tab.0.right/64.27.1302.741@64.27.1302.741" timestamp="1606907573854" />
-    <state x="201" y="31" width="1022" height="737" key="SettingsEditor" timestamp="1606905228939">
-      <screen x="64" y="27" width="1302" height="741" />
+    <state width="1271" height="172" key="GridCell.Tab.0.right/72.27.1294.741@72.27.1294.741" timestamp="1606912435686" />
+    <state x="208" y="31" width="1022" height="737" key="SettingsEditor" timestamp="1606911778783">
+      <screen x="72" y="27" width="1294" height="741" />
     </state>
     <state x="201" y="31" width="1022" height="737" key="SettingsEditor/64.27.1302.741@64.27.1302.741" timestamp="1606905228939" />
-    <state x="208" y="31" width="1022" height="737" key="SettingsEditor/72.27.1294.741@72.27.1294.741" timestamp="1606834252825" />
+    <state x="208" y="31" width="1022" height="737" key="SettingsEditor/72.27.1294.741@72.27.1294.741" timestamp="1606911778783" />
     <state x="496" y="312" width="438" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606907246992">
       <screen x="64" y="27" width="1302" height="741" />
     </state>
     <state x="496" y="312" width="438" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/64.27.1302.741@64.27.1302.741" timestamp="1606907246992" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>121</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

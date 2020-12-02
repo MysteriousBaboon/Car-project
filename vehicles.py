@@ -1,5 +1,6 @@
 import pygame
 
+
 class Vehicle:
     def setName(self, name):
         self.name = name
@@ -106,3 +107,5 @@ class Vehicles:
 
     def getListVehicules(self):
         return self.vehicles
+
+

@@ -8,11 +8,13 @@ def display_road():
 
 
 def display_scoreboard():
-    pass
-
-
-def display_vehicules():
-    pass
+    pygame.draw.rect(window_surface, BROWN, pygame.Rect(0, 0, window_width, 100))
+    pygame.draw.rect(window_surface, BLACK, pygame.Rect(0, 0, window_width, 100), 2)
+    score_txt = font_lemonmilk.render("Score :", True, BLACK)
+    window_surface.blit(score_txt, (100, 50 - score_txt.get_size()[1] / 2))
+    score = 10000
+    value_txt = font_lemonmilk.render(str(score), True, BLACK)
+    window_surface.blit(value_txt, (200, 50 - value_txt.get_size()[1] / 2))
 
 
 def display(game_state):
@@ -29,8 +31,7 @@ def display(game_state):
         window_surface.fill(GREEN)
 
         display_road()
-        display_scoreboard()
-        display_vehicules()
+        #display_vehicules()
 
         # Loading new texts.
         example_txt = font_lemonmilk.render("Example", True, BLACK)
@@ -44,6 +45,7 @@ def display(game_state):
         # Blit the users car. (Bumblebee)
         window_surface.blit(allVehicles.vehicles[player_index].image,
                             (player.x, player.y))
+        display_scoreboard()
 
     # Blit the surface "button_surface" on the main surface (window_surface) on coord x,y = 100,75.
     # For exemple we can control it.
@@ -54,6 +56,7 @@ def display(game_state):
 
 # Colors for display.
 WHITE, BLACK, GREEN, RED, GRAY = (255, 255, 255), (0, 0, 0), (0, 128, 0), (255, 0, 0), (224, 224, 224)
+BROWN = (160, 82, 45)
 
 # Exemple loading a pic.
 button_surface = pygame.image.load('assets/button.png')
@@ -109,13 +112,13 @@ while launched:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_BACKSPACE:
                 game_state = "in_game"
-            elif event.key == pygame.K_UP:
+            elif event.key == pygame.K_UP and player.check_collision_border("Top", 0):
                 player.move('up')
-            elif event.key == pygame.K_DOWN:
+            elif event.key == pygame.K_DOWN and player.check_collision_border("Bottom", window_height):
                 player.move('down')
-            elif event.key == pygame.K_LEFT and player.check_collision_border("Left"):
+            elif event.key == pygame.K_LEFT and player.check_collision_border("Left", 0):
                 player.move('left')
-            elif event.key == pygame.K_RIGHT:
+            elif event.key == pygame.K_RIGHT and player.check_collision_border("Right", window_width):
                 player.move('right')
     player.check_all_collisions(gameObject_list)
 

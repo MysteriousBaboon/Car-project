@@ -42,7 +42,7 @@ def rand_add_bot(list_bot, vehicles, index_row, last_row):
         if i.y / 96 < 1:
             return list_bot, index_row
 
-    if random.randint(0, 1) == 0:
+    if random.randint(0, 2) == 0:
         if len(list_bot) < 10:
             list_bot = add_bot(list_bot, vehicles)
         return list_bot, index_row

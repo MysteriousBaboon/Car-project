@@ -55,18 +55,31 @@ ds.display(game_state, window, player, list_bot, allVehicles, init_timer, road)
 
 # Start mainloop.
 launched = True
+
+# To avoid key retention
+lockKey = False
+countLock = 10
 while launched:
     # Collect and use events for user.
+    if lockKey:
+        countLock -= 1
+        if countLock <= 0 :
+            lockKey = False
+            countLock = 10
+        
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             launched = False
         elif event.type == pygame.KEYDOWN:  # If a key is down
             if game_state == "in_game":
                 if event.key == pygame.K_LEFT:  # If the key down is the left arrow
-                    player.move('Left')
+                    if not lockKey: # To avoid key retention
+                        player.move('Left')
+                        lockKey = True
                 elif event.key == pygame.K_RIGHT:  # If the key down is the right arrow
-                    player.move('Right')
-
+                    if not lockKey: # To avoid key retention
+                        player.move('Right')
+                        lockKey = True
             elif game_state == "menu" or game_state == "game_over":
                 if event.key == pygame.K_RETURN:
                     init_timer, player, list_bot, index_row, last_row = init_game()

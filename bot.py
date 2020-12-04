@@ -3,12 +3,14 @@ import random
 class OneBot(object):
     """docstring for OneBot"""
 
-    def __init__(self, vehicles, x=-1):
+    def __init__(self, vehicles, positionX=-1):
         super(OneBot, self).__init__()
-        if x == -1:
-            self.x = random.randint(1, 3)
+        if positionX == -1:
+            self.positionX = random.randint(1, 3)
         else:
-            self.x = x
+            self.positionX = positionX
+
+        self.x = self.positionX*85+100
         self.y = 0
         rand = 21
         while rand == 21:
@@ -17,11 +19,20 @@ class OneBot(object):
 
         self.width = self.image.get_size()[0]
         self.height = self.image.get_size()[1]
-        
 
 def add_bot(list_bot, vehicles):
-    rand = random.randint(1, 3)
-    list_bot.append(OneBot(vehicles, x=rand))
+    done = False
+    count = 0
+    while done == False and count <= 100:
+        rand = random.randint(1, 3)
+        done = True
+        for i in list_bot:
+            if i.positionX == rand and i.y <= 100:
+                done = False
+                break
+        if done == True:
+            list_bot.append(OneBot(vehicles, positionX=rand))
+        count += 1
     return list_bot
 
 def rand_add_bot(list_bot, vehicles, index_row, last_row):
@@ -33,7 +44,7 @@ def rand_add_bot(list_bot, vehicles, index_row, last_row):
         if i.y / 96 < 1:
             return list_bot, index_row
 
-    if random.randint(0, 2) == 0:
+    if random.randint(0, 1) == 0:
         if len(list_bot) < 10:
             list_bot = add_bot(list_bot, vehicles)
         return list_bot, index_row

@@ -14,7 +14,7 @@ pygame.init()
 
 #  Initialize a Player instance, create an enemy bot
 def init_game():
-    instance = pl.Player(speed=1, life=1,
+    instance = pl.Player(speedX=4, speedY=1, life=1,
                          coordinates=(2, window.height - 50 - allVehicles.vehicles[player_index].height),
                          size=(allVehicles.vehicles[player_index].width, allVehicles.vehicles[player_index].height))
     tmp_bot = bot.OneBot(vehicles=allVehicles.vehicles)

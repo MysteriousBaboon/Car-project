@@ -42,7 +42,9 @@ def display(game_state, window, player, list_bot, allVehicles, init_timer, road,
         window.surface.fill(GREEN)
         #time.time() - init_timer
         road.display(4)
-        window.surface.blit(allVehicles.vehicles[21].image, (player.x * 85 + 100, player.y))
+        #window.surface.blit(allVehicles.vehicles[21].image, (player.x * 85 + 100, player.y))
+        player.update()
+        window.surface.blit(allVehicles.vehicles[21].image, (player.x, player.y))
         i = 0
         while i < len(list_bot):
             list_bot[i].y += 2
@@ -50,7 +52,7 @@ def display(game_state, window, player, list_bot, allVehicles, init_timer, road,
                 list_bot.pop(i)
                 i -= 1
             else:
-                window.surface.blit(list_bot[i].image, (list_bot[i].x * 85 + 100, list_bot[i].y))
+                window.surface.blit(list_bot[i].image, (list_bot[i].x, list_bot[i].y))
             i += 1
         display_scoreboard(window, init_timer)
 

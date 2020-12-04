@@ -15,9 +15,9 @@ pygame.init()
 #  Initialize a Player instance, create an enemy bot
 def init_game():
     instance = pl.Player(speedX=4, speedY=1, life=1,
-                         coordinates=(2, window.height - 50 - allVehicles.vehicles[player_index].height),
-                         size=(allVehicles.vehicles[player_index].width, allVehicles.vehicles[player_index].height))
-    tmp_bot = bot.OneBot(vehicles=allVehicles.vehicles)
+                         coordinates=(2, window.height - 50 - allVehicles.getVehicle(player_index).height),
+                         size=(allVehicles.getVehicle(player_index).width, allVehicles.getVehicle(player_index).height))
+    tmp_bot = bot.OneBot(allVehicles)
     list_bot = [tmp_bot]
     init_timer = time.time()
     index_row = 0
@@ -51,7 +51,7 @@ score = init_timer
 road = Roads.Roads(window.surface, window.width, window.height)
 
 # First display.
-ds.display(game_state, window, player, list_bot, allVehicles, init_timer, road)
+window.display(game_state, player, list_bot, allVehicles, init_timer, road)
 
 # Start mainloop.
 launched = True
@@ -87,13 +87,13 @@ while launched:
 
     if game_state == "in_game":
         index_row += 4
-        list_bot, last_row = bot.rand_add_bot(list_bot, allVehicles.vehicles, int(index_row / 96), last_row)
+        list_bot, last_row = bot.rand_add_bot(list_bot, allVehicles, int(index_row / 96), last_row)
         if player.check_all_collisions(list_bot):
             if player.hp <= 1:
                 score = int((time.time() - init_timer) * 50)
                 game_state = "game_over"
 
-    ds.display(game_state, window, player, list_bot, allVehicles, init_timer, road, score=score)
+    window.display(game_state, player, list_bot, allVehicles, init_timer, road, score=score)
 
     # For fps.
     clock.tick(60)

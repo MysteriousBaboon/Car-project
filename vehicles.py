@@ -102,8 +102,11 @@ class Vehicles:
         # Return the image
         return image
 
+    def getVehicle(self, index):
+        return self.vehicles[index]
+        
     def getCountVehicule(self):
-        return self.count
+        return len(self.vehicles)
 
     def getListVehicules(self):
         return self.vehicles

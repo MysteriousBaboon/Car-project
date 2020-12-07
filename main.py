@@ -90,7 +90,7 @@ while launched:
         list_bot, last_row = bot.rand_add_bot(list_bot, allVehicles, int(index_row / 96), last_row)
         if player.check_all_collisions(list_bot):
             if player.hp <= 1:
-                score = int((time.time() - init_timer) * 50)
+                score = int((time.time() - init_timer) * 30)
                 game_state = "game_over"
 
     window.display(game_state, player, list_bot, allVehicles, init_timer, road, score=score)

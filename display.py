@@ -18,11 +18,11 @@ class Window:
         pygame.draw.rect(self.surface, BLACK, pygame.Rect(0, 0, self.width, 100), 2)
         score_txt = self.font.render("Score :", True, BLACK)
         self.surface.blit(score_txt, (100, 50 - score_txt.get_size()[1] / 2))
-        score = int((time.time() - init_timer) * 50)
-        value_txt = self.font.render(str(score), True, BLACK)
+        score = int( ((time.time() - init_timer) * 30) / 100)
+        print(score)
+        value_txt = self.font.render(str(score) + " Km", True, BLACK)
         self.surface.blit(value_txt, (200, 50 - value_txt.get_size()[1] / 2))
-        kilo_txt = self.font.render("Km", True, BLACK)
-        self.surface.blit(kilo_txt, (250, 50 - value_txt.get_size()[1] / 2))
+
     
     
     def display(self, game_state, player, list_bot, allVehicles, init_timer, road, score=0):

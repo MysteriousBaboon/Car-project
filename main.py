@@ -10,7 +10,7 @@ import Roads
 
 # Init the framework Pygame
 pygame.init()
-
+pygame.mixer.init(frequency=22050, size=-16, channels=2, buffer=4096)
 
 #  Initialize a Player instance, create an enemy bot
 def init_game():
@@ -26,8 +26,12 @@ def init_game():
 
 
 # Example loading a pic, an icon.
-button_surface = pygame.image.load('assets/button.png')
 icon_surface = pygame.image.load('assets/icon.ico')
+
+#pygame.mixer.music.load("assets/Laser_Gun.mp3")
+pygame.mixer.music.load("assets/loop.wav")
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.play(-1)
 
 # Attribute the precedently loaded icon as our game icon and the name of the window as Car Project
 pygame.display.set_icon(icon_surface)
@@ -90,9 +94,14 @@ while launched:
         list_bot, last_row = bot.rand_add_bot(list_bot, allVehicles, int(index_row / 96), last_row)
         if player.check_all_collisions(list_bot):
             if player.hp <= 1:
+                pygame.mixer.music.load("assets/laser_gun.wav")
+                pygame.mixer.music.play()
                 score = int((time.time() - init_timer) * 30)
                 game_state = "game_over"
 
+    if game_state != "game_over" and pygame.mixer.music.get_busy() == False:
+            pygame.mixer.music.load("assets/loop.wav")
+            pygame.mixer.music.play(-1)
     window.display(game_state, player, list_bot, allVehicles, init_timer, road, score=score)
 
     # For fps.

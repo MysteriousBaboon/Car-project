@@ -1,52 +1,27 @@
-import random
+import constants as cst
+from vehicle import Vehicle
 
-class OneBot(object):
-    """docstring for OneBot"""
 
-    def __init__(self, allVehicles, positionX=-1):
-        #super(OneBot, self).__init__()
-        if positionX == -1:
-            self.positionX = random.randint(1, 3)
+class Bot(Vehicle):
+    def __init__(self, vehicleModel, speedX=1, speedY=2, numColumn=2, numRow=-1):
+        Vehicle.__init__(self, vehicleModel, speedX, speedY, numColumn, numRow)
+
+    def updatePosition(self):
+        Vehicle.updatePosition(self)
+
+    def changeDestination(self, numColumn):
+        if self.numColumn == numColumn:
+            return False
+        if self.numColumn > numColumn:
+            if self.numColumn > 1:
+                self.numColumn -= 1
+                self.gotoX = self.numColumn * cst.SCREEN_COLUMN_SIZE + cst.SCREEN_COLUMN_SIZE - self.width / 2
+                self.offsetX = (self.x - self.gotoX)
         else:
-            self.positionX = positionX
+            if self.numColumn < 3:
+                self.numColumn += 1
+                self.gotoX = self.numColumn * cst.SCREEN_COLUMN_SIZE + cst.SCREEN_COLUMN_SIZE - self.width / 2
+                self.offsetX = -(self.gotoX - self.x)
 
-        self.x = self.positionX*85+100
-        self.y = 0
-        rand = 21
-        while rand == 21:
-            rand = random.randint(0, allVehicles.getCountVehicule()-1)
-        self.image = allVehicles.getVehicle(rand).getImage()
-
-        self.width = self.image.get_size()[0]
-        self.height = self.image.get_size()[1]
-
-def add_bot(list_bot, allVehicles):
-    done = False
-    count = 0
-    while done == False and count <= 100:
-        rand = random.randint(1, 3)
-        done = True
-        for i in list_bot:
-            if i.positionX == rand and i.y <= 100:
-                done = False
-                break
-        if done == True:
-            list_bot.append(OneBot(allVehicles, positionX=rand))
-        count += 1
-    return list_bot
-
-def rand_add_bot(list_bot, allVehicles, index_row, last_row):
-
-    if last_row == index_row:
-        return list_bot, index_row
-
-    for i in list_bot:
-        if i.y / 96 < 1:
-            return list_bot, index_row
-
-    if random.randint(0, 1) == 0:
-        if len(list_bot) < 10:
-            list_bot = add_bot(list_bot, allVehicles)
-        return list_bot, index_row
-    else:
-        return list_bot, index_row
+        self.x = self.gotoX + self.offsetX
+        return True

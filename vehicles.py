@@ -1,114 +1,204 @@
+import constants as cst
 import pygame
-
-
-class Vehicle:
-    def setName(self, name):
-        self.name = name
-        self.x = 0
-        self.y = 0
-        self.width = 0
-        self.height = 0
-        rect = pygame.Rect((self.x, self.y, self.width, self.height))
-        self.image = pygame.Surface(rect.size)
-
-    def setLocation(self, xy):
-        # print(xy)
-        xy = xy.split(",")
-        self.x = int(xy[0])
-        self.y = int(xy[1])
-
-    def setSize(self, size):
-        # print(size)
-        hw = size.split(",")
-        self.width = int(hw[0])
-        self.height = int(hw[1])
-
-    def setImage(self, image):
-        self.image = image
-
-    def getImage(self):
-        return self.image
-
-    def getRect(self):
-        rect = pygame.Rect((self.x, self.y, self.width, self.height))
-        return rect
-
-    def __str__(self):
-        return f"{self.name} : loc({self.x}, {self.y}), size({self.width}, {self.height})"
-
+import random
+from vehicle import Vehicle, VehicleModel
+from player import Player
+from bot import Bot
 
 class Vehicles:
-    def __init__(self):
+    def __init__(self, window):
         """ Constructor. Pass in the file name of the sprite sheet. """
+        self.window = window
+        self.player = None
+        self.vehicleModels = []
+        self.vehiclesOnTheRoad = []
+        self._loadModels()
+
+    def _loadModels(self):
         # Load the sprite sheet.
         self.sprite_sheet = pygame.image.load('assets/Cars/cars.png')
 
         filepath = 'assets/Cars/cars.txt'
-
         # Using readlines()
-        file1 = open(filepath, 'r')
-        Lines = file1.readlines()
+        fileHandle = open(filepath, 'r')
+        Lines = fileHandle.readlines()
 
-        self.count = 0
-        self.vehicles = []
-        newVehicle = Vehicle()
-        firstVehicle = True
-        # Fetch all vehicles with they params
+        newVehicleModel = VehicleModel()  # Create the first vehicle model
+        isFirstVehicle = True
+        # Fetch all vehicle models with they params
         for line in Lines:
-            self.count += 1
             if line == "":
                 # end of file
-                # print("Line{}: End")
+                newVehicleModel.image = self.fetchImageModel(
+                    newVehicleModel.x,
+                    newVehicleModel.y,
+                    newVehicleModel.width,
+                    newVehicleModel.height
+                )
+                self.vehicleModels.append(newVehicleModel)
                 # Add new vehicle
-                rect = pygame.Rect((newVehicle.x, newVehicle.y, newVehicle.width, newVehicle.height))
-                image = pygame.Surface(rect.size)
-                image.blit(self.sprite_sheet, (0, 0), rect)
-                newVehicle.setImage(image)
-                self.vehicles.append(newVehicle)
+                newVehicleModel = VehicleModel()
+
+                otherVehicle = Vehicle(newVehicleModel)
+                otherVehicle.y
 
             elif not line.find(" ") >= 0:
-                # New vehicule
-                line = line.replace(" ", "")
-                # print("Line{}: Name = {}".format(count, line.strip()))
-                if not firstVehicle:
-                    # Add new vehicle
-                    rect = pygame.Rect((newVehicle.x, newVehicle.y, newVehicle.width, newVehicle.height))
-                    image = pygame.Surface(rect.size)
-                    image.blit(self.sprite_sheet, (0, 0), rect)
-                    newVehicle.setImage(image)
-                    self.vehicles.append(newVehicle)
-                # Save the last vehicle
-                newVehicle = Vehicle()
-                newVehicle.setName(line)
-                firstVehicle = False
+                # New vehicule model
+                line = line.replace(" ", "")  # Remove spaces
+                if not isFirstVehicle:
+                    # Add new vehicle model to the list
+                    newVehicleModel.image = self._fetchImageModel(
+                        newVehicleModel.x,
+                        newVehicleModel.y,
+                        newVehicleModel.width,
+                        newVehicleModel.height
+                    )
+                    self.vehicleModels.append(newVehicleModel)
+
+                # Prepare for the new vehicle model
+                newVehicleModel = VehicleModel()
+                newVehicleModel.name = line
+                isFirstVehicle = False
 
             else:
                 # Param of vehicle
                 line = line.replace(" ", "")
-                # print("Line{}: Param = {}".format(count, line.strip()))
                 if line.find("xy:") >= 0:
-                    newVehicle.setLocation(line.split(":")[1])
+                    newVehicleModel.setLocation(line.split(":")[1])
                 elif line.find("size:") >= 0:
-                    newVehicle.setSize(line.split(":")[1])
+                    newVehicleModel.setSize(line.split(":")[1])
 
-    def getImage(self, x, y, width, height):
+    def _fetchImageModel(self, x, y, width, height):
         """ Grab a single image out of a larger spritesheet
             Pass in the x, y location of the sprite
             and the width and height of the sprite. """
         # Create a new blank image
-        image = pygame.Surface([width, height])
+        image = pygame.Surface([width, height]).convert_alpha()
         # Copy the sprite from the large sheet onto the smaller image
         image.blit(self.sprite_sheet, (0, 0), (x, y, width, height))
+        image.set_colorkey((255,0,255)) # Transparency is Magenta
         # Return the image
         return image
 
-    def getVehicle(self, index):
-        return self.vehicles[index]
-        
-    def getCountVehicule(self):
-        return len(self.vehicles)
+    def addPlayer(self, remainingLives=3, speedX=4, speedY=1, numColumn=2):
+        self.player = Player(self.vehicleModels[cst.PLAYER_INDEX],
+                                remainingLives,
+                                speedX,
+                                speedY,
+                                numColumn,
+                                numRow=7)
+        self.vehiclesOnTheRoad.append(self.player)
 
-    def getListVehicules(self):
-        return self.vehicles
+    def addBot(self):
+        countVehicle = 0
+        for oneVehicle in self.vehiclesOnTheRoad:
+            if oneVehicle.y < 0:
+                # One vehicle is already on the top row
+                return
+            if oneVehicle.y < (cst.SCREEN_ROW_SIZE * 4):
+                # Count vehicles which are before the forth top row
+                countVehicle += 1
 
+        if countVehicle >= cst.BOTS_MAX_4ROWS:
+            # Too many vehicles has already insert
+            print(countVehicle)
+            return
 
+        # Don't always add a vehicle, it's random
+        if random.randint(0, 1) == 0:
+            if len(self.vehiclesOnTheRoad) < cst.BOTS_MAX_ALL_ROAD:
+                # We can add one bot
+                countOverflow = 0
+                while countOverflow <= 100:
+                    randomWay = random.randint(1, 3)  # Choice one way of the road
+                    if not self._obstacleIsOnThisWay(randomWay):
+                        self._addRandomVehiculeModel(randomWay)
+                        break
+                    countOverflow += 1  # security overflow
+
+    def _obstacleIsOnThisWay(self, numWay):
+        """
+        Check if an obstacle is in the way
+        @param numWay: numero of the way
+        @return: True if an obstacle is on this way
+        """
+        for oneVehicle in self.vehiclesOnTheRoad:
+            if type(oneVehicle) == Player:
+                continue
+            if oneVehicle.numColumn == numWay and oneVehicle.y <= 0:
+                return True
+        return False
+
+    def _addRandomVehiculeModel(self, randomWay):
+        randomModelIndex = cst.PLAYER_INDEX
+        # Search random model index that isn't player
+        while randomModelIndex == cst.PLAYER_INDEX:
+            randomModelIndex = random.randint(0, len(self.vehicleModels) - 1)
+
+        rndSpeed = 2
+        # TODO : Rendre la vitesse des bots variables,
+        #        mais pour ça il faut intégrer la détection de collision entre bots
+        # rndSpeed = random.randint(1,3)
+        oneBot = Bot(self.vehicleModels[randomModelIndex],
+                        speedX=1,
+                        speedY=rndSpeed,
+                        numColumn=randomWay,
+                        numRow=-1)
+        self.vehiclesOnTheRoad.append(oneBot)
+
+    def clearVehiculesOnTheRoad(self):
+        self.vehiclesOnTheRoad = []
+
+    def checkPlayerCollisions(self):
+        if len(self.vehiclesOnTheRoad) == 0:
+            return False
+
+        player_rect = pygame.Rect(self.player.x, self.player.y, self.player.width, self.player.height)
+        for oneVehicle in self.vehiclesOnTheRoad:
+            if type(oneVehicle) == Player:
+                continue
+
+            vehicle_rect = pygame.Rect(oneVehicle.x, oneVehicle.y, oneVehicle.width, oneVehicle.height)
+            if player_rect.colliderect(vehicle_rect):
+                self.player.remainingLives -= 1
+                return True
+            else:
+                return False
+
+    def checkBotsCollisions(self):
+        if len(self.vehiclesOnTheRoad) == 0:
+            return False
+
+        for oneVehicle in self.vehiclesOnTheRoad:
+            if oneVehicle.isMoving:
+                continue
+            oneVehicle_rect = pygame.Rect(oneVehicle.x, oneVehicle.y+cst.SCREEN_ROW_SIZE, oneVehicle.width, oneVehicle.height+cst.SCREEN_ROW_SIZE)
+            for anotherVehicle in self.vehiclesOnTheRoad:
+                if oneVehicle == anotherVehicle:
+                    continue
+
+                anotherVehicle_rect = pygame.Rect(anotherVehicle.x, anotherVehicle.y, anotherVehicle.width, anotherVehicle.height)
+                if oneVehicle_rect.colliderect(anotherVehicle_rect):
+                    if not oneVehicle.isMoving:
+                        #rndWay = random.choice(1, 3)
+                        rndWay = random.choice([i for i in range(1, 3) if i != anotherVehicle.numColumn])
+                        oneVehicle.changeDestination(rndWay)
+
+    def update(self):
+        # update position of player
+        self.player.updatePosition()
+        # update position of bots
+        i = 0
+        while i < len(self.vehiclesOnTheRoad):
+            oneVehicle = self.vehiclesOnTheRoad[i]
+            if type(oneVehicle) != Player:
+                oneVehicle.y += oneVehicle.speedY
+                oneVehicle.updatePosition()
+                if oneVehicle.y >= cst.SCREEN_HEIGHT:
+                    self.vehiclesOnTheRoad.pop(i)
+                    i -= 1
+                else:
+                    self.window.blit(self.vehiclesOnTheRoad[i].image,
+                                     (self.vehiclesOnTheRoad[i].x,
+                                      self.vehiclesOnTheRoad[i].y))
+            i += 1
